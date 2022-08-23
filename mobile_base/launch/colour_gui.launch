@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+
+    <arg name="image_topic" default="/lib_bot/camera/image_raw"/>
+
+    <node name="color_gui_node" pkg="cmvision" type="colorgui" respawn="false"
+
+    output="screen">
+
+        <remap from="image" to="$(arg image_topic)"/>
+
+    </node>    
+
+</launch>

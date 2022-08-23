@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<launch>
+<!-- 
+  <param name="robot_description" command="$(find xacro)/xacro inorder '$(find mobile_base)/urdf/mobile_bot.urdf.xacro'"/>
+-->
+  <param name="robot_description" command="cat $(find mobile_base)/urdf/mobile_bot.urdf"/>
+  <!-- send fake joint values -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="use_gui" value="False"/>
+  </node>
+
+  <!-- Combine joint values -->
+  <node name="robot_state_publiser" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+     <remap from="/joint_states" to="/lib_bot/joint_states"/>
+  </node>   
+  <node pkg="tf" type="static_transform_publisher" name="ma_odom_broadcaster"
+      args="-0.05 -0.15 0 0 0 0 base_link link_left_wheel 100"/>
+  <node pkg="tf" type="static_transform_publisher" name="map_odom_broadcaster"
+      args="-0.05 0.15 0 0 0 0 base_link link_right_wheel 100"/>
+
+  <!-- Show in Rviz   -->
+  <!-- node name="rviz" pkg="rviz" type="rviz"/ -->
+  <!--node name="rviz" pkg="rviz" type="rviz" args="-d $(find mybot_description)/launch/myrobot.rviz"/-->
+
+</launch>
