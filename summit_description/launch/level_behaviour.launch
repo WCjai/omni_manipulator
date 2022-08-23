@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+
+   <include file="$(find mobile_base)/launch/lib_bot_cmvision.launch" />
+   <node name="leveler_wall" pkg="summit_description" type="tracker1.py"/>
+   <node name="track_odj" pkg="mobile_base" type="tracker.py"/>
+</launch>
+
