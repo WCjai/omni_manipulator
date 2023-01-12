@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    
+    <rosparam file="$(find manipulator)/config/lib_bot_control.yaml" command="load"/>
+    
+    <node pkg="controller_manager" name="controller_spawner" type="spawner" respawn="false" output="screen" ns="/lib_bot" args="height_position_controller push_position_controller jaw_1_position_controller jaw_2_position_controller joint_state_controller --shutdown-timeout 3"/> 
+    
+    <node pkg="robot_state_publisher" name="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+      <remap from="/joint_states" to="/lib_bot/joint_states"/>
+    </node>
+
+</launch>
